@@ -11,9 +11,12 @@ import { Etudiant } from '../classes/etudiant';
 export class EtudiantComponent implements OnInit {
 
   etudiant: Etudiant[];
+  idetud;
+  etudiantedit:Etudiant;
 searchterm;
 selectedfiliere="5ea2e4cb1a92ae1d98f9e12b";
 addetudiantForm:FormGroup;
+editetudiantForm:FormGroup;
   constructor(private route: ActivatedRoute, private router: Router,
     private EtudiantService: EtudiantService,
     private fb: FormBuilder
@@ -29,6 +32,19 @@ addetudiantForm:FormGroup;
       cin:new FormControl('' , [Validators.required]),
       date:new FormControl('' , [Validators.required]),
       filiere:new FormControl('' , [Validators.required])
+
+    }
+  );
+
+  this.editetudiantForm = this.fb.group(
+    { name: ['',[Validators.required]],
+      prenom: ['',[Validators.required]],
+      rfid: ['',[Validators.required]],
+      email: ['',[Validators.required]],
+      tel: ['',[Validators.required]],
+      cin: ['',[Validators.required]],
+      date: ['',[Validators.required]],
+      filiere: ['',[Validators.required]],
 
     }
   )
@@ -67,8 +83,8 @@ ajoutetudiant(){
   etud.rfid =this.addetudiantForm.get('rfid').value;
   etud.email=this.addetudiantForm.get('email').value;
   etud.id_filiere=this.selectedfiliere;
+ 
   etud.date_naiss=this.addetudiantForm.get('date').value;
-
 this.EtudiantService.addetudiant(etud).subscribe(
   res => { console.log('add',etud);
   this.ngOnInit()
@@ -77,6 +93,29 @@ this.EtudiantService.addetudiant(etud).subscribe(
 )
 
 
+
+}
+
+openmodal(etud:Etudiant){
+  this.editetudiantForm.patchValue({
+    name:etud.nom,
+    prenom:etud.prenom,
+    cin:etud.cin,
+    rfid:etud.rfid,
+    date_naiss:etud.date_naiss,
+    tel:etud.tel,
+    email:etud.email,
+    filiere:"5ea2e4cb1a92ae1d98f9e12b"
+  });
+  this.idetud=etud._id;
+}
+
+editetudiant(){
+  this.etudiantedit=this.editetudiantForm.getRawValue();
+  this.EtudiantService.updateetudiant(this.idetud,this.etudiantedit).subscribe(
+    res => { console.log('apdate', this.etudiantedit)},
+    error => {console.log('error edit',error)}
+  )
 
 }
 
