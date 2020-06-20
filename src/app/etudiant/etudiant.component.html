@@ -95,10 +95,14 @@
 
 
                 </div>
+<<<<<<< HEAD
               </div>
               <br><br>
              
               
+=======
+                <!-- /.card-body -->
+>>>>>>> 81413b7ce2bd10d7b41731ce982fd49cd153f263
             </div>
             <!-- /.card -->
         </div>
@@ -115,6 +119,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                   </button>
+<<<<<<< HEAD
                  </div>
                  
                  <div class="modal-body">
@@ -190,6 +195,73 @@
 
                         
                         
+=======
+                </div>
+
+                <div class="modal-body">
+                    <form [formGroup]="addetudiantForm" (ngSubmit)="ajoutetudiant()">
+
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-4 col-form-label">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-required formControlName="name" id="name" [ngClass]="{'is-invalid': addetudiantForm.get('name').touched && addetudiantForm.get('name').invalid}">
+                                <div class="invalid-feedback"> Entrer un nom ! </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="prenom" class="col-sm-4 col-form-label">Prenom</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-required formControlName="prenom" id="prenom" [ngClass]="{'is-invalid': addetudiantForm.get('prenom').touched && addetudiantForm.get('prenom').invalid}">
+                                <div class="invalid-feedback"> Entrer un Prenom ! </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cin" class="col-sm-4 col-form-label">CIN</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" ng-required formControlName="cin" id="cin" [ngClass]="{'is-invalid': addetudiantForm.get('cin').touched && addetudiantForm.get('cin').invalid}">
+                                <div class="invalid-feedback"> Entrer un CIN ! </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="rfid" class="col-sm-4 col-form-label">RFID</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" ng-required formControlName="rfid" id="rfid" [ngClass]="{'is-invalid': addetudiantForm.get('rfid').touched && addetudiantForm.get('rfid').invalid}">
+                                <div class="invalid-feedback"> Entrer un RFID ! </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date" class="col-sm-4 col-form-label">Date de naissance</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" ng-required formControlName="date" id="date" [ngClass]="{'is-invalid': addetudiantForm.get('date').touched && addetudiantForm.get('date').invalid}">
+                                <div class="invalid-feedback"> Entrer une date de naissance ! </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" ng-required formControlName="email" id="email" [ngClass]="{'is-invalid': addetudiantForm.get('email').touched && addetudiantForm.get('email').invalid}">
+                                <div class="invalid-feedback"> Entrer un email ! </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tel" class="col-sm-4 col-form-label">Telephone</label>
+                            <div class="col-sm-8">
+                                <input type="tel" class="form-control" ng-required formControlName="tel" id="tel" [ngClass]="{'is-invalid': addetudiantForm.get('tel').touched && addetudiantForm.get('tel').invalid}">
+                                <div class="invalid-feedback"> Entrer un numéro de Telephone ! </div>
+
+                            </div>
+                        </div>
+>>>>>>> 81413b7ce2bd10d7b41731ce982fd49cd153f263
 
                         <div class="form-group row">
                             <label for="filiere" class="col-sm-4 col-form-label">filiere</label>
@@ -236,6 +308,7 @@
 
 
 
+<<<<<<< HEAD
     
       <!------------------------------edit  modal  ----------------->
         
@@ -365,3 +438,6 @@
    
     </section>
    
+=======
+</section>
+>>>>>>> 81413b7ce2bd10d7b41731ce982fd49cd153f263
