@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class EtudiantService {
 
-  private BASE_URL="http://localhost:8080";
+  private BASE_URL= "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
-  
+
   getAllEtudiant(){
     return this.http.get<Etudiant[]>(this.BASE_URL+'/api/admin/liststud');
   }
