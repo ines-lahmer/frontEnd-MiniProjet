@@ -1,0 +1,120 @@
+<section class="content-header">
+    <div class="container-fluid">
+
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Liste Des Elimination </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item active">Liste Des Eliminations </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+
+            <div class="card">
+                <div class="card-header">
+
+                    <!------------------searchterm------------>
+
+
+                </div>
+                <br>
+             <div > 
+                 <form  [formGroup]="filterForm" >
+                     <div class="form-group row">
+                <div class="col-md-4">
+                    <select formControlName="filiere" class="form-control" (change)="onfilChange()">
+                   
+                      <option [ngValue]="null" disabled>Choisir Filière</option>
+                     <option *ngFor="let filiere of listefiliere" [ngValue]="filiere">
+                        {{ filiere.libelle }}
+                      </option>
+                    </select>
+                    
+                </div>
+                <div class="col-md-4">
+                    <select formControlName="matiere" class="form-control" (change)="onmatChange()">
+                   
+                        <option [ngValue]="null" disabled>Choisir Matiere</option>
+                       <option *ngFor="let matiere of listematiere" [ngValue]="matiere">
+                          {{ matiere.libelle }}
+                        </option>
+                      </select>
+  
+                </div>
+                <div class="col-md-4">
+                <button class="btn btn-success" (click)="onfilter()"> Filter<i class="fas fa-search"></i></button>
+
+            </div>
+            </div>
+            
+            </form>
+             </div>
+                <!------------------endsearchterm------------>
+
+
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="card-tools">
+                       
+                    </div>
+                    <br><br>
+                    <table id="example1" class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th></th>
+                               
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>CIN</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let etud of elimination">
+                                <td></td>
+                               
+                                <td> {{ etud.nom }}</td>
+                                <td>{{ etud.prenom}}</td>
+                                <td>{{etud.cin}}</td>
+                                
+
+
+                              
+                                <td class="align-middle">
+                                    <div class="btn-group btn-group-sm">
+                                        <button (click)="delete(etud._id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </td>
+
+
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+              </div>
+              <br><br>
+             
+              
+            </div>
+            <!-- /.card -->
+        </div>
+        </section>

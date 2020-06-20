@@ -29,5 +29,8 @@ export class EtudiantService {
   updateetudiant(id, etudiant:Object): Observable<any>{
     return this.http.put(this.BASE_URL+'/api/admin/updstud/'+id,etudiant,httpOptions)
   }
+  getElimination(idfil,idmat):Observable<any>{
+   return this.http.get(this.BASE_URL+'/api/admin/elimination/'+idfil+'/'+idmat)
+  }
 
 }

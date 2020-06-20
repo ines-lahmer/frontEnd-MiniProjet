@@ -3,22 +3,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {EtudiantService} from '../services/etudiant.service'
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Etudiant } from '../classes/etudiant';
+import { EnseignantService } from '../services/enseignant.service';
 @Component({
   selector: 'app-etudiant',
   templateUrl: './etudiant.component.html',
   styleUrls: ['./etudiant.component.css']
 })
 export class EtudiantComponent implements OnInit {
-
+  filiereselected;
   etudiant: Etudiant[];
   idetud;
   etudiantedit:Etudiant;
+  listeMatiere:any=[];
+  listefilere:any=[];
 searchterm;
 selectedfiliere="5ea2e4cb1a92ae1d98f9e12b";
 addetudiantForm:FormGroup;
 editetudiantForm:FormGroup;
   constructor(private route: ActivatedRoute, private router: Router,
-    private EtudiantService: EtudiantService,
+    private EtudiantService: EtudiantService, private EnseignantService: EnseignantService,
     private fb: FormBuilder
   ) { }
 
@@ -50,7 +53,9 @@ editetudiantForm:FormGroup;
   )
  
 
-
+    this.getfilere();
+    
+    this.getmatiere();
     this.listeEtudiant();
   }
   listeEtudiant(){
@@ -70,8 +75,8 @@ delete(id){
 }
 }
 
-onfilChange(){
- // this.selectedfiliere= this.addetudiantForm.get('filiere').value;
+onfileditChange(){
+ this.filiereselected= this.editetudiantForm.get('filiere').value;
 }
 
 ajoutetudiant(){
@@ -82,7 +87,7 @@ ajoutetudiant(){
   etud.tel=this.addetudiantForm.get('tel').value;
   etud.rfid =this.addetudiantForm.get('rfid').value;
   etud.email=this.addetudiantForm.get('email').value;
-  etud.id_filiere=this.selectedfiliere;
+  etud.id_filiere=this.filiereselected._id;
  
   etud.date_naiss=this.addetudiantForm.get('date').value;
 this.EtudiantService.addetudiant(etud).subscribe(
@@ -96,7 +101,9 @@ this.EtudiantService.addetudiant(etud).subscribe(
 
 }
 
-openmodal(etud:Etudiant){
+openmodal(etud,id){
+  this.idetud=id;
+  console.log('formedit', this.idetud)
   this.editetudiantForm.patchValue({
     name:etud.nom,
     prenom:etud.prenom,
@@ -105,9 +112,9 @@ openmodal(etud:Etudiant){
     date_naiss:etud.date_naiss,
     tel:etud.tel,
     email:etud.email,
-    filiere:"5ea2e4cb1a92ae1d98f9e12b"
+    filiere:this.filiereselected._id
   });
-  this.idetud=etud._id;
+ 
 }
 
 editetudiant(){
@@ -119,4 +126,31 @@ editetudiant(){
 
 }
 
+getmatiere(){
+  this.EnseignantService.getMatiere().subscribe(
+    res =>{ for (let mat of res.matiere)
+      {
+        this.listeMatiere.push(mat);
+        console.log("filiere", this.listeMatiere[0]._id)
+      }
+    },
+    error=>{console.log('error',error)}
+  )
+  }
+
+  getfilere(){
+    this.EnseignantService.getFiliere().subscribe(
+     res =>
+      {
+        this.listefilere=res.filiere;
+        console.log("filiere", this.listefilere[0]._id)
+      }
+    ,error=>{console.log('errorfil',error)}
+    )
+    }
+
+    onfiliereChange() {
+      this.filiereselected= this.addetudiantForm.get('filiere').value;
+      console.log('filiereee', this.filiereselected._id);
+    }
 }

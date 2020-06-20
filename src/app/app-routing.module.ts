@@ -5,6 +5,7 @@ import { Etudiant } from './classes/etudiant';
 import { EtudiantComponent } from './etudiant/etudiant.component';
 import { LayoutComponent } from './layout/layout.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
+import { EliminationComponent } from './elimination/elimination.component';
 
 
 
@@ -14,7 +15,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
 
-      { path: 'etudiant', component: EtudiantComponent }
+      { path: 'etudiant', component: EtudiantComponent },
+      { path: 'elimination', component: EliminationComponent }
 
     ]},
 

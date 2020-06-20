@@ -16,6 +16,7 @@ import { EtudiantComponent } from './etudiant/etudiant.component';
 import { LayoutComponent } from './layout/layout.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { ListeseanceComponent } from './listeseance/listeseance.component';
+import { EliminationComponent } from './elimination/elimination.component';
 
 
 
@@ -25,7 +26,8 @@ import { ListeseanceComponent } from './listeseance/listeseance.component';
     EtudiantComponent,
     LayoutComponent,
     EnseignantComponent,
-    ListeseanceComponent
+    ListeseanceComponent,
+    EliminationComponent
 
   ],
   imports: [
