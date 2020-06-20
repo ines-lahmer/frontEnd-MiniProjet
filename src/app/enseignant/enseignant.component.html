@@ -1,0 +1,123 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Liste Des Etudiants </h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item active">Liste Des Etudiants </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+
+            <!-- /.card -->
+
+            <div class="card">
+                <div class="card-header">
+
+                    <!------------------searchterm------------>
+
+
+                </div>
+                <br>
+
+                <!-- <div class="col-md-12">
+                  <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#modal-default"><i class="fas fa-plus"></i> Nouveau</button>
+
+              </div> -->
+                <!------------------endsearchterm------------>
+
+
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                            <input type="text" name="table_search" [(ngModel)]="searchterm" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+
+
+
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Nom et Prenom</th>
+                                <th>cin</th>
+                                <th>Etat</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let etud of listEtd | filter: searchterm">
+                                <td>{{etud.id}}</td>
+                                <td> {{ etud.nom }}{{ etud.prenom}}</td>
+                                <td>{{etud.cin}}</td>
+                                <td> {{etud.etat}}</td>
+
+                                <td class="text-right py-0 align-middle">
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-info" id="{{etud.id}}"><i class="fas fa-edit" (click)="UpdateEtudiant(etud.id)" ></i></button>
+                                        <!-- <button (click)="delete(etud._id)" class="btn btn-danger"><i class="fas fa-trash"></i></button> -->
+                                    </div>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <!-- *******************/.add-modal****************** -->
+    <div class="modal fade" id="modal-default">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="editProfileLabel">Ajouter Etudiant</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- *******************/end.add-modal****************** -->
+
+
+
+
+
+    <!------------------------------edit  modal  ----------------->
+
+
+
+</section>
