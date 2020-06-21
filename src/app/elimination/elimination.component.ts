@@ -4,6 +4,7 @@ import { EnseignantService } from '../services/enseignant.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Etudiant } from '../classes/etudiant';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-elimination',
@@ -19,7 +20,7 @@ export class EliminationComponent implements OnInit {
   matiereselected;
   filterForm:FormGroup;
   constructor(private EtudiantService: EtudiantService, private EnseignantService: EnseignantService,
-    private Router : Router ,private route: ActivatedRoute) { }
+    private Router : Router ,private route: ActivatedRoute , private toster: ToastrService) { }
 
   ngOnInit(): void {
     this.filterForm = new FormGroup(
@@ -90,7 +91,10 @@ getelimination(idfil,idmat){
           error => {console.log ('error delete',error)}
         )
       }
+      this.ngOnInit();
+      this.toster.error("Supprimé", "avec success");
     }
+    
 }
 
 

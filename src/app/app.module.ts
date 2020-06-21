@@ -4,11 +4,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +16,11 @@ import { EnseignantComponent } from './enseignant/enseignant.component';
 import { ListeseanceComponent } from './listeseance/listeseance.component';
 import { EliminationComponent } from './elimination/elimination.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
->>>>>>> 81413b7ce2bd10d7b41731ce982fd49cd153f263
-
+import { AuthGuard } from './guard/auth.guard';
+import { LoginComponent } from './Authentication/login/login.component';
+import { RegisterComponent } from './Authentication/register/register.component';
+import { NotFoundComponent } from './access/not-found/not-found.component';
+import { ForbiddenComponent } from './access/forbidden/forbidden.component';
 
 
 @NgModule({
@@ -29,7 +30,12 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     LayoutComponent,
     EnseignantComponent,
     ListeseanceComponent,
-    EliminationComponent
+    EliminationComponent,
+    LoginComponent,
+    RegisterComponent,
+    NotFoundComponent,
+    ForbiddenComponent
+    
 
   ],
   imports: [
@@ -41,6 +47,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     BrowserAnimationsModule,
     Ng2SearchPipeModule ,
     CommonModule,
+ 
 
 
 ToastrModule.forRoot({

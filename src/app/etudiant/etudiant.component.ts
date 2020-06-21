@@ -4,6 +4,7 @@ import {EtudiantService} from '../services/etudiant.service'
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Etudiant } from '../classes/etudiant';
 import { EnseignantService } from '../services/enseignant.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-etudiant',
   templateUrl: './etudiant.component.html',
@@ -17,19 +18,19 @@ export class EtudiantComponent implements OnInit {
   listeMatiere:any=[];
   listefilere:any=[];
 searchterm;
-selectedfiliere="5ea2e4cb1a92ae1d98f9e12b";
+//selectedfiliere="5ea2e4cb1a92ae1d98f9e12b";
 addetudiantForm:FormGroup;
 editetudiantForm:FormGroup;
   constructor(private route: ActivatedRoute, private router: Router,
     private EtudiantService: EtudiantService, private EnseignantService: EnseignantService,
-    private fb: FormBuilder
+    private fb: FormBuilder , private toaster : ToastrService
   ) { }
 
   ngOnInit(): void {
   this.addetudiantForm = new FormGroup(
     { name:new FormControl('' , [Validators.required]),
       prenom:new FormControl('' , [Validators.required]),
-      rfid:new FormControl('' , [Validators.required]),
+      rfid:new FormControl('' , [Validators.required,Validators.maxLength(8)]),
       email:new FormControl('' , [Validators.required]),
       tel:new FormControl('' , [Validators.required]),
       cin:new FormControl('' , [Validators.required]),
@@ -43,7 +44,7 @@ editetudiantForm:FormGroup;
     { name: ['',[Validators.required]],
       prenom: ['',[Validators.required]],
       rfid: ['',[Validators.required]],
-      email: ['',[Validators.required]],
+      email: ['',[Validators.required],],
       tel: ['',[Validators.required]],
       cin: ['',[Validators.required]],
       date: ['',[Validators.required]],
@@ -72,6 +73,8 @@ delete(id){
       console.log('deletee')},
     error => {console.log ('error delete',error)}
   )
+  this.ngOnInit();
+  this.toaster.error("Supprimé", "avec success");
 }
 }
 
@@ -93,7 +96,7 @@ ajoutetudiant(){
 this.EtudiantService.addetudiant(etud).subscribe(
   res => { console.log('add',etud);
   this.ngOnInit()
-
+  this.toaster.success("Ajout", "avec success");
   },error =>{ console.log('error',error)}
 )
 
@@ -102,33 +105,59 @@ this.EtudiantService.addetudiant(etud).subscribe(
 }
 
 openmodal(etud,id){
+  console.log("Filiere:"+this.filiereselected);
   this.idetud=id;
   console.log('formedit', this.idetud)
+  console.log('ETUD'+JSON.stringify(etud));
   this.editetudiantForm.patchValue({
     name:etud.nom,
     prenom:etud.prenom,
     cin:etud.cin,
     rfid:etud.rfid,
-    date_naiss:etud.date_naiss,
+    date:etud.date_naiss,
     tel:etud.tel,
     email:etud.email,
-    filiere:this.filiereselected._id
+    filiere:etud.id_filiere
+    
   });
+  this.editetudiantForm.get('filiere').setValue(etud.id_filiere);
  
 }
 
 editetudiant(){
-  this.etudiantedit=this.editetudiantForm.getRawValue();
-  this.EtudiantService.updateetudiant(this.idetud,this.etudiantedit).subscribe(
-    res => { console.log('apdate', this.etudiantedit)},
+  let Data={
+    nom:this.nom,
+    prenom:this.prenom,
+    date_naiss:this.date,
+    rfid:this.rfid,
+    tel:this.tel,
+    cin:this.cin,
+    email:this.email,
+    id_filiere:this.filiereselected._id
+
+
+  }
+  this.EtudiantService.updateetudiant(this.idetud,Data).subscribe(
+    res => { console.log('apdate', Data)
+      },
     error => {console.log('error edit',error)}
   )
-
+  this.ngOnInit();
+ 
+  this.toaster.success( "'success", 'Update avec succés', {
+    timeOut: 3000,
+   progressBar: true
+   });
+      
+     
 }
 
 getmatiere(){
+  console.log('matiere1');
   this.EnseignantService.getMatiere().subscribe(
-    res =>{ for (let mat of res.matiere)
+    res =>{ 
+      console.log("matiere2");
+      for (let mat of res.matiere)
       {
         this.listeMatiere.push(mat);
         console.log("filiere", this.listeMatiere[0]._id)
@@ -141,10 +170,10 @@ getmatiere(){
   getfilere(){
     this.EnseignantService.getFiliere().subscribe(
      res =>
-      {
+     {
         this.listefilere=res.filiere;
-        console.log("filiere", this.listefilere[0]._id)
-      }
+        } 
+      
     ,error=>{console.log('errorfil',error)}
     )
     }
@@ -153,4 +182,34 @@ getmatiere(){
       this.filiereselected= this.addetudiantForm.get('filiere').value;
       console.log('filiereee', this.filiereselected._id);
     }
+
+    get nom(){
+      return this.editetudiantForm.value.name;
+    }
+    get prenom(){
+      return this.editetudiantForm.value.prenom;
+    }
+    
+    get date(){
+      return this.editetudiantForm.value.date;
+    }
+    
+    get rfid(){
+      return this.editetudiantForm.value.rfid;
+    }
+    
+    get tel(){
+      return this.editetudiantForm.value.tel;
+    }
+    
+    get email(){
+      return this.editetudiantForm.value.email;
+    }
+    
+    get cin(){
+      return this.editetudiantForm.value.cin;
+    }
+    
+    
+
 }
