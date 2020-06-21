@@ -16,15 +16,7 @@ import { EtudiantComponent } from './etudiant/etudiant.component';
 import { LayoutComponent } from './layout/layout.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { ListeseanceComponent } from './listeseance/listeseance.component';
-<<<<<<< HEAD
 import { EliminationComponent } from './elimination/elimination.component';
-=======
-import { LoginComponent } from './Authentication/login/login.component';
-import { RegisterComponent } from './Authentication/register/register.component';
-import { ForbiddenComponent } from './access/forbidden/forbidden.component';
-import { NotFoundComponent } from './access/not-found/not-found.component';
-import { LogoutComponent } from './Authentication/logout/logout.component';
-import { AuthGuard } from './guard/auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 >>>>>>> 81413b7ce2bd10d7b41731ce982fd49cd153f263
 
@@ -37,15 +29,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     LayoutComponent,
     EnseignantComponent,
     ListeseanceComponent,
-<<<<<<< HEAD
     EliminationComponent
-=======
-    LoginComponent,
-    RegisterComponent,
-    ForbiddenComponent,
-    NotFoundComponent,
-    LogoutComponent
->>>>>>> 81413b7ce2bd10d7b41731ce982fd49cd153f263
 
   ],
   imports: [
@@ -53,7 +37,6 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-
     ReactiveFormsModule,
     BrowserAnimationsModule,
     Ng2SearchPipeModule ,
